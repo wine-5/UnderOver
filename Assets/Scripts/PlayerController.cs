@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 10.0f;
     private Rigidbody2D rb;
 
+    private Vector2 moveInput;
+
     /* フラグの設定 */
     private bool isGrounded = true;
     void Start()
@@ -21,14 +23,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        UpdateDirection();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = context.ReadValue<Vector2>();
+        moveInput = context.ReadValue<Vector2>();
 
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+    }
+
+    private void UpdateDirection()
+    {
+        Debug.Log(moveInput);
+        if(moveInput.x > 0) /* 右に進んでいる */
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if(moveInput.x < 0) /* 左に進んでいる */
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            Debug.Log("移動していない");
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -46,6 +65,5 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
-
     }
 }
