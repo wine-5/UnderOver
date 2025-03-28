@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateDirection()
     {
-        Debug.Log(moveInput);
+        // Debug.Log(moveInput);
         if(moveInput.x > 0) /* 右に進んでいる */
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
