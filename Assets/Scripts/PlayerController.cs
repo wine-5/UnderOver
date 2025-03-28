@@ -7,20 +7,21 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    public float moveSpeed = 5.0f;
-    public float jumpPower = 5.0f;
-    private Rigidbody rb;
+    [Header("移動速度とジャンプ力")]
+    [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float jumpPower = 10.0f;
+    private Rigidbody2D rb;
 
     /* フラグの設定 */
     private bool isGrounded = true;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -32,16 +33,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(isGrounded)
+        if (isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             isGrounded = false;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }
