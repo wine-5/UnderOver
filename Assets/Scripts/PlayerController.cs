@@ -24,29 +24,39 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateDirection();
+        MovePlayer();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        Debug.Log("Move: " + context.ReadValue<Vector2>());
         moveInput = context.ReadValue<Vector2>();
 
+
+
+    }
+
+    private void MovePlayer()
+    {
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+
     }
 
     private void UpdateDirection()
     {
+
         // Debug.Log(moveInput);
-        if(moveInput.x > 0) /* 右に進んでいる */
+        if (moveInput.x >= 1) /* 右に進んでいる */
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if(moveInput.x < 0) /* 左に進んでいる */
+        else if (moveInput.x <= -1) /* 左に進んでいる */
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            Debug.Log("移動していない");
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 
