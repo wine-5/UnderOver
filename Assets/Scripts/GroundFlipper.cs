@@ -7,6 +7,7 @@ public class GroundFlipper : MonoBehaviour
     [SerializeField] private LayerMask groundLayer; /* 地面用のレイヤーの設定 */
 
     [SerializeField] private GameObject playerObject; /* プレイヤーのGameObjectを入れる変数 */
+    [SerializeField] private float rayLength = 5.0f; /* Rayの長さを設定する変数 */
     private Transform playerTransform; /* プレイヤーのTransformを入れる変数 */
     void Start()
     {
@@ -23,7 +24,9 @@ public class GroundFlipper : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
+
+        if (Input.GetMouseButtonDown(0)) /* 左クリックを押したとき */
         {
             FlipGround(); /* Playerの位置を逆向きにする */
         }
@@ -42,7 +45,7 @@ public class GroundFlipper : MonoBehaviour
 
         if(hit.collider != null) /* Raycastが地面に当たった場合 */
         {
-            Vector2 newPosition = hit.collider.transform.position; /* Raycastが当たった地面の位置   を取得 */
+            Vector2 newPosition = hit.collider.transform.position; /* Raycastが当たった地面の位置を取得 */
             newPosition.y -= 0.1f; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
