@@ -13,9 +13,9 @@ public class CameraController : MonoBehaviour
     public Vector2 maxBounds; /* カメラの右上の制限 */
 
     private float cameraHalfWidth; /* カメラの横幅の半分 */
-    private float cameraHalfHeight; /* カメラの縦幅の半分 */
+    private float cameraHalfHeight; /* カメラの縦幅の半分 (使用しない可能性あり) */
 
-    private const float CAMERA_FIX_POSITION = 3.0f; /* カメラの固定位置 */
+    private const float CAMERA_FIX_POSITION = 3.0f; /* カメラの固定位置 (使用しない可能性あり) */
     void Start()
     {
         Camera camera = Camera.main;
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
         Vector2 targetPosition = target.position;
 
         /* カメラの位置を設定する */
-        transform.position = new Vector3(targetPosition.x, transform.position.y, zPosition); /* y座標（高さ）は固定 */
+        transform.position = new Vector3(targetPosition.x, transform.position.y, zPosition);  // y座標（高さ）は固定、z座標だけ変更
 
     }
 
