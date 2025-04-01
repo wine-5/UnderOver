@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour
 {
 
-    [SerializeField] private float zPosition = -10f;
+    [SerializeField] private float zPosition = -100f;
     public Transform target; /* 追従するオブジェクトを入れる */
     public float smoothing = 5f; /* カメラの追従速度 */
     public Vector2 minBounds; /* カメラの左下の制限 */
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
         Vector2 targetPosition = target.position;
 
         /* カメラの位置を設定する */
-        transform.position = new Vector3(targetPosition.x, targetPosition.y + CAMERA_FIX_POSITION, zPosition);
+        transform.position = new Vector3(targetPosition.x, transform.position.y, zPosition); /* y座標（高さ）は固定 */
 
     }
 
