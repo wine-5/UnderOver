@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     [Header("移動速度とジャンプ力")]
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float jumpPower = 10.0f;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     private Vector2 moveInput;
 
     /* フラグの設定 */
-    private bool isGrounded = true;
+    public bool isGrounded = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
