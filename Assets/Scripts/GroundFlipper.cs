@@ -73,7 +73,7 @@ public class GroundFlipper : MonoBehaviour
         }
 
         /* ここから下の地面に落ちないように重力を無効にする */
-        rb.gravityScale = 0; /* 重力を無効にする */
+        rb.gravityScale = -1; /* 重力を無効にする */
 
     }
 }
