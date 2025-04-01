@@ -39,21 +39,19 @@ public class GroundFlipper : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isGroundFlip) /* 左クリックを押したとき */
         {
             FlipGround(); /* Playerの位置を逆向きにする */
-            Debug.Log(isGroundFlip);
         }
         else if (Input.GetMouseButtonDown(0) && isGroundFlip) /* 地面が反転しているとき */
         {
             isGroundFlip = false; /* 地面が反転していない状態に戻す */
             rb.gravityScale = 1; /* 重力を有効にする */
-
-            Debug.Log(isGroundFlip);
-
+            transform.rotation = Quaternion.Euler(0, 180, 0); /* Playerの向きを元に戻す */
         }
     }
 
     private void FlipGround()
     {
         isGroundFlip = true; /* 地面が反転している */
+        transform.rotation = Quaternion.Euler(0, 0, 180); /* Playerの向きを反転させる */
 
         if (playerTransform == null)
         {

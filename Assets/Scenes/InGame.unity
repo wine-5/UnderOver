@@ -560,6 +560,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
+  rb: {fileID: 0}
+  isGrounded: 1
+  groundFlipper: {fileID: 1418612355}
 --- !u!114 &1418612342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,6 +722,7 @@ MonoBehaviour:
     m_Bits: 64
   rayLength: 10
   playerObject: {fileID: 1418612339}
+  isGroundFlip: 0
 --- !u!1001 &1498854209
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -16,9 +17,16 @@ public class PlayerController : MonoBehaviour
 
     /* フラグの設定 */
     public bool isGrounded = true;
+
+    [SerializeField] private GroundFlipper groundFlipper; /* GroundFlipperのスクリプトを入れる変数 */
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if (groundFlipper == null)
+        {
+            // Debug.LogError("GroundFlipperが設定されていない");
+        }
     }
 
     void Update()
@@ -29,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Move: " + context.ReadValue<Vector2>());
+        // Debug.Log("Move: " + context.ReadValue<Vector2>());
         moveInput = context.ReadValue<Vector2>();
 
 
@@ -44,19 +52,37 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateDirection()
     {
+        bool isGroundFlip = groundFlipper.isGroundFlip; /* GroundFlipperのスクリプトを取得 */
 
-        // Debug.Log(moveInput);
-        if (moveInput.x >= 1) /* 右に進んでいる */
+        if (!isGroundFlip)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (moveInput.x >= 1) /* 右に進んでいる */
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (moveInput.x <= -1) /* 左に進んでいる */
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
         }
-        else if (moveInput.x <= -1) /* 左に進んでいる */
+        else if (isGroundFlip)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            if (moveInput.x >= 1) /* 右に進んでいる */
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+            else if (moveInput.x <= -1) /* 左に進んでいる */
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 180);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
         }
     }
 
