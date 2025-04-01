@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         bool isGroundFlip = groundFlipper.isGroundFlip; /* GroundFlipperのスクリプトを取得 */
 
-        if (!isGroundFlip)
+        if (!isGroundFlip) /* 下の地面 */
         {
             if (moveInput.x >= 1) /* 右に進んでいる */
             {
@@ -69,7 +69,21 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
-        else if (isGroundFlip)
+        else if (isGroundFlip) /* 上の地面 */
+        {
+            if (moveInput.x >= 1) /* 右に進んでいる */
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+            else if (moveInput.x <= -1) /* 左に進んでいる */
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 180);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y); 
+            }
+        }
         {
             if (moveInput.x >= 1) /* 右に進んでいる */
             {
