@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "UnderOver.sln"
+    "dotnet.defaultSolution": "UnderOver.sln",
+    "liveServer.settings.multiRootWorkspaceName": "UnderOver"
 }
