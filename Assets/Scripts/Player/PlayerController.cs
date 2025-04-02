@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IGoalable
 {
 
     [Header("移動速度とジャンプ力")]
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y); 
+                rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
     }
@@ -92,13 +92,13 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded) /* どちらかの地面にいるとき */
         {
-            Debug.Log("今とんだ");
+            // Debug.Log("今とんだ");
             float jumpDirection = isGroundFlip ? -1 : 1; /* 上の地面なら下に、下の地面なら上に */
             rb.velocity = Vector2.zero; /* ジャンプをリセット */
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * jumpDirection); /* ジャンプする */
 
-            Debug.Log(isGrounded);
-            
+            // Debug.Log(isGrounded);
+
             isGrounded = false;
         }
     }
@@ -108,6 +108,18 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+        }
+    }
+
+
+    /* IGoalableを実装する */
+    public void OnGoalReached()
+    {
+        Debug.Log("ゴールに到達した！");
+
+        if (SceneController.Instance != null)
+        {
+            SceneController.Instance.GoToResultScene();
         }
     }
 }
