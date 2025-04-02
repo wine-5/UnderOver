@@ -84,20 +84,6 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y); 
             }
         }
-        {
-            if (moveInput.x >= 1) /* 右に進んでいる */
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
-            else if (moveInput.x <= -1) /* 左に進んでいる */
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 180);
-            }
-            else
-            {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-            }
-        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
