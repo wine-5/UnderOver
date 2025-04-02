@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("今のPlayerのHP" + currentHP);
+        // Debug.Log("今のPlayerのHP" + currentHP);
         currentHP = hpIcons.Count; /* HPアイコンの数を取得 */
     }
 
@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     private void TakeDamage()
     {
         currentHP--;
-        Debug.Log("攻撃を受けた後のPlayerのHP" + currentHP);
+        // Debug.Log("攻撃を受けた後のPlayerのHP" + currentHP);
         hpIcons[currentHP].enabled = false; /* HPアイコンを非表示にする */
         if (currentHP <= 0)
         {

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("移動速度とジャンプ力")]
     [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private float jumpPower = 10.0f;
+    [SerializeField] private float jumpPower = 5.0f;
     public Rigidbody2D rb;
 
     private Vector2 moveInput;
@@ -88,9 +88,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (isGrounded)
+        bool isGroundFlip = groundFlipper.isGroundFlip; /* GroundFlipperのスクリプトを取得 */
+
+        if (isGrounded || isGroundFlip) /* どちらかの地面にいるとき */
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            float jumpDirection = isGroundFlip ? -1 : 1; /* 上の地面なら下に、下の地面なら上に */
+            rb.velocity = Vector2.zero; /* ジャンプをリセット */
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower * jumpDirection); /* ジャンプする */
+
+            Debug.Log(isGrounded);
+            
             isGrounded = false;
         }
     }
