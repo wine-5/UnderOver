@@ -90,8 +90,9 @@ public class PlayerController : MonoBehaviour
     {
         bool isGroundFlip = groundFlipper.isGroundFlip; /* GroundFlipperのスクリプトを取得 */
 
-        if (isGrounded || isGroundFlip) /* どちらかの地面にいるとき */
+        if (isGrounded) /* どちらかの地面にいるとき */
         {
+            Debug.Log("今とんだ");
             float jumpDirection = isGroundFlip ? -1 : 1; /* 上の地面なら下に、下の地面なら上に */
             rb.velocity = Vector2.zero; /* ジャンプをリセット */
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * jumpDirection); /* ジャンプする */
