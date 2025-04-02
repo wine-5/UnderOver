@@ -1,18 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IGoalable : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    public interface IGoalable
     {
-        
+        void OnGoalReached(); /* Playerがゴールした時に呼び出す */
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
