@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour, IGoalable
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y); 
+                rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
     }
@@ -98,9 +98,9 @@ public class PlayerController : MonoBehaviour, IGoalable
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * jumpDirection); /* ジャンプする */
 
             // Debug.Log(isGrounded);
-            
+
             isGrounded = false;
-         }
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -116,5 +116,10 @@ public class PlayerController : MonoBehaviour, IGoalable
     public void OnGoalReached()
     {
         Debug.Log("ゴールに到達した！");
+
+        if (SceneController.Instance != null)
+        {
+            SceneController.Instance.GoToResultScene();
+        }
     }
 }
