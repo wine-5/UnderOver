@@ -25,7 +25,7 @@ public class SceneController : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject); これを消すとタイトルへ複数回行ける
         }
     }
     public void GoToResultScene()
@@ -35,10 +35,11 @@ public class SceneController : MonoBehaviour
     }
     public void GoToNextStage()
     {
-        Debug.Log(currentStage);
         currentStage++;
+        Debug.Log("今のステージは" + currentStage);
+
         string nextSceneName = "";
-        switch(currentStage)
+        switch (currentStage)
         {
             case 1:
                 nextSceneName = SceneNames.Stage1;
