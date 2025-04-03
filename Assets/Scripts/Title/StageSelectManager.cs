@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageSelectManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public GameObject stageSelectPanal; /* ステージセレクトのパネルのオブジェクトを入れる変数 */
+    public GameObject stageSelectButton; /* ステージセレクトボタンを入れる変数 */
     void Start()
     {
-        
+        stageSelectPanal.SetActive(false); /* 最初は非表示 */
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowStageSelect()
     {
-        
+        stageSelectPanal.SetActive(true); /* ここで表示する */
+        stageSelectButton.SetActive(false); /* ステージセレクトボタンは非表示にする */
     }
+
+    /* ステージ選択ボタンが押されたときの処理 */
+    public void LoadStage(string stageName)
+    {
+        Debug.Log(stageName);
+        SceneManager.LoadScene(stageName);   
+    }
+
+    public void CloseStageSelect()
+    {
+        stageSelectPanal.SetActive(false); /* 非表示 */
+    }
+
 }
