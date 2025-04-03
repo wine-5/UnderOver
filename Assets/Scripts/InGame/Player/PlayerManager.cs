@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     /* プレイヤーのHP */
-    [SerializeField] private int currentHP = 3;
+    [SerializeField] public int currentHP = 3;
     public List<Image> hpIcons; /* HPアイコンを入れる変数 */
 
     /* Playerを入れる変数 */

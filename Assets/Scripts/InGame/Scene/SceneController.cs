@@ -28,6 +28,7 @@ public class SceneController : MonoBehaviour
             // DontDestroyOnLoad(gameObject); これを消すとタイトルへ複数回行ける
         }
     }
+
     public void GoToResultScene()
     {
         SceneManager.LoadScene(SceneNames.Result);
