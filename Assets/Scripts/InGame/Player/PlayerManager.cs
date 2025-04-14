@@ -28,12 +28,15 @@ public class PlayerManager : MonoBehaviour
 
     private void TakeDamage()
     {
-        currentHP--;
-        // Debug.Log("攻撃を受けた後のPlayerのHP" + currentHP);
-        hpIcons[currentHP].enabled = false; /* HPアイコンを非表示にする */
-        if (currentHP <= 0)
+        if (currentHP > 0)
         {
-            player.SetActive(false);
+            currentHP--;
+            hpIcons[currentHP].enabled = false; /* HPアイコンを非表示にする */
+            if (currentHP <= 0)
+            {
+                player.SetActive(false);
+            }
         }
+
     }
 }

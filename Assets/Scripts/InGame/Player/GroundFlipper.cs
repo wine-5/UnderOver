@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,16 @@ public class GroundFlipper : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
+        if (isGroundFlip)
+        {
+            Debug.DrawRay(playerTransform.position, Vector2.down * rayLength, Color.red); /* Raycastの可視化 */
+
+        }
+        else
+        {
+            Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
+
+        }
 
         if (Input.GetMouseButtonDown(0) && !isGroundFlip) /* 左クリックを押したとき */
         {
@@ -42,9 +52,7 @@ public class GroundFlipper : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0) && isGroundFlip) /* 地面が反転しているとき */
         {
-            isGroundFlip = false; /* 地面が反転していない状態に戻す */
-            rb.gravityScale = 1; /* 重力を有効にする */
-            transform.rotation = Quaternion.Euler(0, 180, 0); /* Playerの向きを元に戻す */
+            ResetGround();
         }
     }
 
@@ -69,11 +77,27 @@ public class GroundFlipper : MonoBehaviour
             newPosition.y -= 0.1f; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
-            playerTransform.rotation = Quaternion.Euler(0, 0, 180); /* Playerの向きを反転させる */
         }
 
         /* ここから下の地面に落ちないように重力を無効にする */
         rb.gravityScale = -1; /* 重力を逆にする */
+    }
 
+    private void ResetGround()
+    {
+        isGroundFlip = false;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        RaycastHit2D hit = Physics2D.Raycast(playerTransform.position, Vector2.down, Mathf.Infinity, groundLayer);
+        if (hit.collider != null) /* Raycastが地面に当たった場合 */
+        {
+            Vector2 newPosition = hit.point; /* Raycastが当たった地面の位置を取得 */
+            // Debug.Log(newPosition); /* デバッグ用に地面の位置を表示 */
+            newPosition.y -= -0.1f; /* めり込みするのを防止するために少し下に設定 */
+
+            playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
+        }
+
+        rb.gravityScale = 1;
     }
 }
