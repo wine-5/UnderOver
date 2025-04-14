@@ -18,6 +18,10 @@ public class GroundFlipper : MonoBehaviour
     /* フラグ設定 */
     public bool isGroundFlip = false; /* 地面が反転しているかどうか */
 
+    /* 定数の設定 */
+    private const float INVERT_ROTATION = 180.0f;
+
+
     void Start()
     {
         if (playerObject != null)
@@ -37,13 +41,12 @@ public class GroundFlipper : MonoBehaviour
     {
         if (isGroundFlip)
         {
-            Debug.DrawRay(playerTransform.position, Vector2.down * rayLength, Color.red); /* Raycastの可視化 */
+            Debug.DrawRay(playerTransform.position, Vector2.down * rayLength, Color.blue); /* Raycastの可視化 */
 
         }
         else
         {
             Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
-
         }
 
         if (Input.GetMouseButtonDown(0) && !isGroundFlip) /* 左クリックを押したとき */
@@ -59,13 +62,9 @@ public class GroundFlipper : MonoBehaviour
     private void FlipGround()
     {
         isGroundFlip = true; /* 地面が反転している */
-        transform.rotation = Quaternion.Euler(0, 0, 180); /* Playerの向きを反転させる */
 
-        if (playerTransform == null)
-        {
-            Debug.LogError("PlayerTransformがnull");
-            return;
-        }
+        Vector3 currentRotation = playerTransform.eulerAngles;
+        transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y + INVERT_ROTATION, currentRotation.z + INVERT_ROTATION); /* Playerの向きを反転させる */
 
         /* Playerの真上をRayで探す */
         RaycastHit2D hit = Physics2D.Raycast(playerTransform.position, Vector2.up, Mathf.Infinity, groundLayer); /* Raycastを使って地面の情報を取得 */
@@ -73,7 +72,7 @@ public class GroundFlipper : MonoBehaviour
         if (hit.collider != null) /* Raycastが地面に当たった場合 */
         {
             Vector2 newPosition = hit.point; /* Raycastが当たった地面の位置を取得 */
-            // Debug.Log(newPosition); /* デバッグ用に地面の位置を表示 */
+            Debug.Log(hit.collider.gameObject.name); /* デバッグ用に地面の位置を表示 */
             newPosition.y -= 0.1f; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
@@ -86,13 +85,15 @@ public class GroundFlipper : MonoBehaviour
     private void ResetGround()
     {
         isGroundFlip = false;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        Vector3 currentRotation = playerTransform.eulerAngles;
+        transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y + INVERT_ROTATION, currentRotation.z + 180f);
 
         RaycastHit2D hit = Physics2D.Raycast(playerTransform.position, Vector2.down, Mathf.Infinity, groundLayer);
         if (hit.collider != null) /* Raycastが地面に当たった場合 */
         {
             Vector2 newPosition = hit.point; /* Raycastが当たった地面の位置を取得 */
-            // Debug.Log(newPosition); /* デバッグ用に地面の位置を表示 */
+            Debug.Log(hit.collider.gameObject.name); /* デバッグ用に地面の位置を表示 */
             newPosition.y -= -0.1f; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
