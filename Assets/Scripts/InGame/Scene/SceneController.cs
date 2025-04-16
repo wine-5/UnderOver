@@ -15,7 +15,8 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance { get; private set; } /* シングルトン */
 
-    private uint currentStage = 0;
+    private int currentStage = 0;
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,12 +33,12 @@ public class SceneController : MonoBehaviour
     public void GoToResultScene()
     {
         SceneManager.LoadScene(SceneNames.Result);
-        Debug.Log("リザルトシーンに移動する");
+        // Debug.Log("リザルトシーンに移動する");
     }
     public void GoToNextStage()
     {
         currentStage++;
-        Debug.Log("今のステージは" + currentStage);
+        // Debug.Log("今のステージは" + currentStage);
 
         string nextSceneName = "";
         switch (currentStage)
@@ -64,4 +65,6 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneNames.Title);
     }
+
+    
 }
