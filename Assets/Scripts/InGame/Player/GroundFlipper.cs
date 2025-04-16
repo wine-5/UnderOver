@@ -72,7 +72,7 @@ public class GroundFlipper : MonoBehaviour
         if (hit.collider != null) /* Raycastが地面に当たった場合 */
         {
             Vector2 newPosition = hit.point; /* Raycastが当たった地面の位置を取得 */
-            Debug.Log(hit.collider.gameObject.name); /* デバッグ用に地面の位置を表示 */
+            // Debug.Log(hit.collider.gameObject.name); /* デバッグ用に地面の位置を表示 */
             newPosition.y -= 0.1f; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */

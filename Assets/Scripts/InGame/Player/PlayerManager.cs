@@ -5,12 +5,14 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     /* プレイヤーのHP */
-    [SerializeField] public int currentHP = 3;
+    [SerializeField] private int currentHP = 3;
     public List<Image> hpIcons; /* HPアイコンを入れる変数 */
 
     /* Playerを入れる変数 */
     public GameObject player;
 
+    /* InvincibilityController（無敵状態のスクリプト）*/
+    [SerializeField] private InvincibilityController invincibilityController;
 
     void Start()
     {
@@ -28,13 +30,17 @@ public class PlayerManager : MonoBehaviour
 
     private void TakeDamage()
     {
-        if (currentHP > 0)
+        if (currentHP > 0 && !invincibilityController.IsInvincible())
         {
             currentHP--;
+            GameData.playerHP = currentHP;
             hpIcons[currentHP].enabled = false; /* HPアイコンを非表示にする */
+            invincibilityController.StartInvincibility(); /* 無敵化開始 */
+            
             if (currentHP <= 0)
             {
                 player.SetActive(false);
+                SceneController.Instance.GoToResultScene();
             }
         }
 
