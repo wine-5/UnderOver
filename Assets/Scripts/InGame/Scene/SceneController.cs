@@ -15,7 +15,7 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance { get; private set; } /* シングルトン */
 
-    private int currentStage = 0;
+    private int currentStage = 1;
     
     void Awake()
     {
