@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
             if (currentHP <= 0)
             {
                 player.SetActive(false);
-                SceneController.Instance.GoToResultScene();
+                SceneController.Instance.LoadResult();
             }
         }
 

@@ -2,84 +2,66 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class SceneNames
-{
-    public const string Title = "Title";
-    public const string Result = "Result";
-    public const string Stage1 = "Stage1";
-    public const string Stage2 = "Stage2";
-    public const string Stage3 = "Stage3";
-}
-
 public class SceneController : MonoBehaviour
 {
-    public static SceneController Instance { get; private set; } /* シングルトン */
-    private int currentStage = 0;
+    /* インスタンスを作成 */
+   public static SceneController Instance {get; private set;}
 
-    private readonly string[] stageSceneNames = {
-        SceneNames.Stage1,
-        SceneNames.Stage2,
-        SceneNames.Stage3,
-    };
-    
+   /* Stageの基本設定 */
+   public int currentStage{get; private set;} = 1;
+
+   private const int MAX_STAGE = 3;
+
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        if(Instance != null)
         {
-            Destroy(gameObject); /* すでにInstanceが存在した場合は新しいInstanceを削除する */
-            Debug.Log("すでにSceneControllerが存在した。新しいInstanceを削除した");
+            Destroy(gameObject);
+            Debug.Log("既にInstanceが作成されている。");
+            return;
         }
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); /* タイトルシーン以降も使用できるように */
-            Debug.Log("SceneControllerにInstanceを設定した");
+            DontDestroyOnLoad(gameObject); /* シーンを跨いでも情報を保持する */
         }
     }
 
-    void Start()
+    public void LoadStage(int stageNumber)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        for(int i = 0; i < stageSceneNames.Length; i++)
-        {
-            if(stageSceneNames[i] == currentSceneName)
-            {
-                currentStage = i;
-                break;
-            }
-        }
+        Debug.Log("LoadStageメソッドが呼ばれた");
+        currentStage = stageNumber;
+        SceneManager.LoadScene("Stage" + stageNumber);
     }
 
-    public void GoToResultScene()
+    /* 次のステージをロードするメソッド */
+    public void LoadNextStage()
     {
-        SceneManager.LoadScene(SceneNames.Result);
-        // Debug.Log("リザルトシーンに移動する");
-    }
-    public void GoToNextStage()
-    {
-        currentStage++;
-
-        if(currentStage < stageSceneNames.Length)
+        if(currentStage < MAX_STAGE)
         {
-            string nextSceneName = stageSceneNames[currentStage];
-            SceneManager.LoadScene(nextSceneName);
+            LoadStage(currentStage + 1);
         }
         else
         {
-            Debug.Log("全ステージクリア！");
+            LoadTitle();
         }
     }
 
-    public void GoToTitleScene()
+    /* もう一度同じシーンを読み込むメソッド */
+    public void ReloadCurrentStage()
     {
-        SceneManager.LoadScene(SceneNames.Title);
+        LoadStage(currentStage);
     }
 
-    public void RetryScene()
+    /* リザルトシーンに遷移するメソッド */
+    public void LoadResult()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        SceneManager.LoadScene("Result");
     }
 
-    
+    /* タイトルシーンへ遷移するメソッド */
+    public void LoadTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
 }

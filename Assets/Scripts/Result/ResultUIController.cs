@@ -15,7 +15,7 @@ public class ResultUIController : MonoBehaviour
 
     public void ShowResultUI()
     {
-        Debug.Log($"Playerの残機は：{GameData.playerHP}");
+        // Debug.Log($"Playerの残機は：{GameData.playerHP}");
         if (GameData.playerHP > 0)
         {
             clearObj.gameObject.SetActive(true);

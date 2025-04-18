@@ -8,7 +8,7 @@ public class GoalManager : MonoBehaviour
 
         if (SceneController.Instance != null)
         {
-            SceneController.Instance.GoToResultScene();
+            SceneController.Instance.LoadResult();
         }
         else
         {
