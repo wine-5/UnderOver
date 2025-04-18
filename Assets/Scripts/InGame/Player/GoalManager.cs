@@ -4,7 +4,7 @@ public class GoalManager : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ゴールに到達した！");
+        // Debug.Log("ゴールに到達した！");
 
         if (SceneController.Instance != null)
         {
@@ -12,7 +12,7 @@ public class GoalManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("SceneControllerのInstanceがnullです");
+            // Debug.Log("SceneControllerのInstanceがnullです");
         }
     }
 }

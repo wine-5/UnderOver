@@ -17,7 +17,7 @@ public class SceneController : MonoBehaviour
         if(Instance != null)
         {
             Destroy(gameObject);
-            Debug.Log("既にInstanceが作成されている。");
+            // Debug.Log("既にInstanceが作成されている。");
             return;
         }
         else
@@ -29,7 +29,6 @@ public class SceneController : MonoBehaviour
 
     public void LoadStage(int stageNumber)
     {
-        Debug.Log("LoadStageメソッドが呼ばれた");
         currentStage = stageNumber;
         SceneManager.LoadScene("Stage" + stageNumber);
     }
