@@ -14,19 +14,39 @@ public static class SceneNames
 public class SceneController : MonoBehaviour
 {
     public static SceneController Instance { get; private set; } /* シングルトン */
+    private int currentStage = 0;
 
-    private int currentStage = 1;
+    private readonly string[] stageSceneNames = {
+        SceneNames.Stage1,
+        SceneNames.Stage2,
+        SceneNames.Stage3,
+    };
     
     void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); /* すでにInstanceが存在した場合は新しいInstanceを削除する */
+            Debug.Log("すでにSceneControllerが存在した。新しいInstanceを削除した");
         }
         else
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject); これを消すとタイトルへ複数回行ける
+            DontDestroyOnLoad(gameObject); /* タイトルシーン以降も使用できるように */
+            Debug.Log("SceneControllerにInstanceを設定した");
+        }
+    }
+
+    void Start()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        for(int i = 0; i < stageSceneNames.Length; i++)
+        {
+            if(stageSceneNames[i] == currentSceneName)
+            {
+                currentStage = i;
+                break;
+            }
         }
     }
 
@@ -38,32 +58,27 @@ public class SceneController : MonoBehaviour
     public void GoToNextStage()
     {
         currentStage++;
-        // Debug.Log("今のステージは" + currentStage);
 
-        string nextSceneName = "";
-        switch (currentStage)
+        if(currentStage < stageSceneNames.Length)
         {
-            case 1:
-                nextSceneName = SceneNames.Stage1;
-                break;
-            case 2:
-                nextSceneName = SceneNames.Stage2;
-                break;
-            case 3:
-                nextSceneName = SceneNames.Stage3;
-                break;
-            default:
-                Debug.Log("次のステージはもうない");
-                return; /* 処理を終了 */
+            string nextSceneName = stageSceneNames[currentStage];
+            SceneManager.LoadScene(nextSceneName);
         }
-
-        /* 次のステージに移動する処理 */
-        SceneManager.LoadScene(nextSceneName);
+        else
+        {
+            Debug.Log("全ステージクリア！");
+        }
     }
 
     public void GoToTitleScene()
     {
         SceneManager.LoadScene(SceneNames.Title);
+    }
+
+    public void RetryScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 
     
