@@ -4,10 +4,15 @@ public class GoalManager : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        IGoalable goalable = other.GetComponent<IGoalable>();
-        if(goalable != null)
+        // Debug.Log("ゴールに到達した！");
+
+        if (SceneController.Instance != null)
         {
-            goalable.OnGoalReached(); /* Playerがゴールした時に呼び出す */
+            SceneController.Instance.LoadResult();
+        }
+        else
+        {
+            // Debug.Log("SceneControllerのInstanceがnullです");
         }
     }
 }

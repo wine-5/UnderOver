@@ -18,10 +18,9 @@ public class StageSelectManager : MonoBehaviour
     }
 
     /* ステージ選択ボタンが押されたときの処理 */
-    public void LoadStage(string stageName)
+    public void StartStage(int stageNumber)
     {
-        Debug.Log(stageName);
-        SceneManager.LoadScene(stageName);   
+        SceneController.Instance.LoadStage(stageNumber);
     }
 
     public void CloseStageSelect()

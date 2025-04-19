@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, IGoalable
+public class PlayerController : MonoBehaviour
 {
 
     [Header("移動速度とジャンプ力")]
@@ -112,14 +112,5 @@ public class PlayerController : MonoBehaviour, IGoalable
     }
 
 
-    /* IGoalableを実装する */
-    public void OnGoalReached()
-    {
-        Debug.Log("ゴールに到達した！");
-
-        if (SceneController.Instance != null)
-        {
-            SceneController.Instance.GoToResultScene();
-        }
-    }
+    
 }

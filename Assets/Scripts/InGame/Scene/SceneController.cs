@@ -2,69 +2,65 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class SceneNames
-{
-    public const string Title = "Title";
-    public const string Result = "Result";
-    public const string Stage1 = "Stage1";
-    public const string Stage2 = "Stage2";
-    public const string Stage3 = "Stage3";
-}
-
 public class SceneController : MonoBehaviour
 {
-    public static SceneController Instance { get; private set; } /* シングルトン */
+    /* インスタンスを作成 */
+   public static SceneController Instance {get; private set;}
 
-    private int currentStage = 1;
-    
+   /* Stageの基本設定 */
+   public int currentStage{get; private set;} = 1;
+
+   private const int MAX_STAGE = 3;
+
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        if(Instance != null)
         {
             Destroy(gameObject);
+            // Debug.Log("既にInstanceが作成されている。");
+            return;
         }
         else
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject); これを消すとタイトルへ複数回行ける
+            DontDestroyOnLoad(gameObject); /* シーンを跨いでも情報を保持する */
         }
     }
 
-    public void GoToResultScene()
+    public void LoadStage(int stageNumber)
     {
-        SceneManager.LoadScene(SceneNames.Result);
-        // Debug.Log("リザルトシーンに移動する");
+        currentStage = stageNumber;
+        SceneManager.LoadScene("Stage" + stageNumber);
     }
-    public void GoToNextStage()
-    {
-        currentStage++;
-        // Debug.Log("今のステージは" + currentStage);
 
-        string nextSceneName = "";
-        switch (currentStage)
+    /* 次のステージをロードするメソッド */
+    public void LoadNextStage()
+    {
+        if(currentStage < MAX_STAGE)
         {
-            case 1:
-                nextSceneName = SceneNames.Stage1;
-                break;
-            case 2:
-                nextSceneName = SceneNames.Stage2;
-                break;
-            case 3:
-                nextSceneName = SceneNames.Stage3;
-                break;
-            default:
-                Debug.Log("次のステージはもうない");
-                return; /* 処理を終了 */
+            LoadStage(currentStage + 1);
         }
-
-        /* 次のステージに移動する処理 */
-        SceneManager.LoadScene(nextSceneName);
+        else
+        {
+            LoadTitle();
+        }
     }
 
-    public void GoToTitleScene()
+    /* もう一度同じシーンを読み込むメソッド */
+    public void ReloadCurrentStage()
     {
-        SceneManager.LoadScene(SceneNames.Title);
+        LoadStage(currentStage);
     }
 
-    
+    /* リザルトシーンに遷移するメソッド */
+    public void LoadResult()
+    {
+        SceneManager.LoadScene("Result");
+    }
+
+    /* タイトルシーンへ遷移するメソッド */
+    public void LoadTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
 }
