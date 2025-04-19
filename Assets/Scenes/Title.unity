@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 129458758}
   - component: {fileID: 129458757}
   - component: {fileID: 129458756}
+  - component: {fileID: 129458759}
   m_Layer: 5
   m_Name: Stage1Button
   m_TagString: Untagged
@@ -150,7 +151,7 @@ RectTransform:
   m_GameObject: {fileID: 129458754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.94664, y: 5.94664, z: 5.94664}
+  m_LocalScale: {x: 5.7779555, y: 5.7779555, z: 5.7779555}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 477493572}
@@ -255,6 +256,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129458754}
   m_CullTransparentMesh: 1
+--- !u!114 &129458759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129458754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fafca3341d64e64486c014b06c72e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.1
+  smoothTime: 0.2
 --- !u!1 &477493571
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +802,7 @@ GameObject:
   - component: {fileID: 1223612910}
   - component: {fileID: 1223612909}
   - component: {fileID: 1223612908}
+  - component: {fileID: 1223612911}
   m_Layer: 5
   m_Name: 'Stage2Button '
   m_TagString: Untagged
@@ -803,7 +819,7 @@ RectTransform:
   m_GameObject: {fileID: 1223612906}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.94664, y: 5.94664, z: 5.94664}
+  m_LocalScale: {x: 5.7779555, y: 5.7779555, z: 5.7779555}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1943660180}
@@ -865,7 +881,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: Stage1
           m_BoolArgument: 0
@@ -908,6 +924,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223612906}
   m_CullTransparentMesh: 1
+--- !u!114 &1223612911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223612906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fafca3341d64e64486c014b06c72e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.1
+  smoothTime: 0.2
 --- !u!1 &1280127375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1055,7 @@ GameObject:
   - component: {fileID: 1431777375}
   - component: {fileID: 1431777374}
   - component: {fileID: 1431777373}
+  - component: {fileID: 1431777376}
   m_Layer: 5
   m_Name: Stage3Button
   m_TagString: Untagged
@@ -1041,7 +1072,7 @@ RectTransform:
   m_GameObject: {fileID: 1431777371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.94664, y: 5.94664, z: 5.94664}
+  m_LocalScale: {x: 5.7779555, y: 5.7779555, z: 5.7779555}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1658881870}
@@ -1103,7 +1134,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: Stage1
           m_BoolArgument: 0
@@ -1146,6 +1177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431777371}
   m_CullTransparentMesh: 1
+--- !u!114 &1431777376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431777371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fafca3341d64e64486c014b06c72e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.1
+  smoothTime: 0.2
 --- !u!1 &1658881869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1538,10 @@ PrefabInstance:
     - target: {fileID: 1690257706837943642, guid: 5efee157fa2e64d4a8f76e8731d10561, type: 3}
       propertyPath: m_Name
       value: StageSelectButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690257706837943642, guid: 5efee157fa2e64d4a8f76e8731d10561, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2254294938557369305, guid: 5efee157fa2e64d4a8f76e8731d10561, type: 3}
       propertyPath: m_Pivot.x
