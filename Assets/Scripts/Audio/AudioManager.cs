@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
         if (clip != null && bgmSource.clip != clip)
         {
             bgmSource.clip = clip;
-            bgmSource.volume = volume;
+            bgmSource.volume = BGMVolume;
             bgmSource.Play();
         }
     }

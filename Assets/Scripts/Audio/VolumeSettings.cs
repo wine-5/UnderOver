@@ -21,11 +21,11 @@ public class VolumeSettings : MonoBehaviour
 
     void SetBGMVolume(float value)
     {
-        AudioManager.Instance.BGMVolume = value;
+        AudioManager.Instance.BGMVolume = value; /* スライダーの値をAudioManagerに反映 */
     }
 
     void SetSEVolume(float value)
     {
-        AudioManager.Instance.SEVolume = value;
+        AudioManager.Instance.SEVolume = value; /* スライダーの値をAudioManagerに反映 */
     }
 }
