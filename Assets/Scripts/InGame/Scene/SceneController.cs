@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     /* インスタンスを作成 */
-   public static SceneController Instance {get; private set;}
+    public static SceneController Instance { get; private set; }
 
-   /* Stageの基本設定 */
-   public int currentStage{get; private set;} = 1;
+    /* Stageの基本設定 */
+    public int currentStage { get; private set; } = 1;
 
-   private const int MAX_STAGE = 3;
+    private const int MAX_STAGE = 3;
 
     void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             // Debug.Log("既にInstanceが作成されている。");
@@ -30,13 +30,30 @@ public class SceneController : MonoBehaviour
     public void LoadStage(int stageNumber)
     {
         currentStage = stageNumber;
+        /* ステージに応じたBGMを再生 */
+        switch (stageNumber)
+        {
+            case 1:
+                AudioManager.Instance.PlayBGM("Stage1");
+                break;
+            case 2:
+                AudioManager.Instance.PlayBGM("Stage2");
+                break;
+                                case 3:
+                AudioManager.Instance.PlayBGM("Stage3");
+                break;
+            default:
+                AudioManager.Instance.PlayBGM("Title");
+                break;
+        }
+
         SceneManager.LoadScene("Stage" + stageNumber);
     }
 
     /* 次のステージをロードするメソッド */
     public void LoadNextStage()
     {
-        if(currentStage < MAX_STAGE)
+        if (currentStage < MAX_STAGE)
         {
             LoadStage(currentStage + 1);
         }

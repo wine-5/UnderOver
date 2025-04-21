@@ -8,6 +8,7 @@ public class StageSelectManager : MonoBehaviour
     public GameObject stageSelectButton; /* ステージセレクトボタンを入れる変数 */
     void Start()
     {
+        AudioManager.Instance.PlayBGM("Title");
         stageSelectPanal.SetActive(false); /* 最初は非表示 */
     }
 

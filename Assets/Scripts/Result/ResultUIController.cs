@@ -16,13 +16,16 @@ public class ResultUIController : MonoBehaviour
     public void ShowResultUI()
     {
         // Debug.Log($"Playerの残機は：{GameData.playerHP}");
-        if (GameData.playerHP > 0)
+        if (GameData.playerHP > 0) /* クリア */
         {
+            AudioManager.Instance.PlayBGM("Clear");
             clearObj.gameObject.SetActive(true);
             gameoverObj.gameObject.SetActive(false);
         }
-        else
+        else /* ゲームオーバー */
         {
+            AudioManager.Instance.PlayBGM("GameOver", 2.0f); /* 音量を2倍で渡す */
+
             clearObj.gameObject.SetActive(false);
             gameoverObj.gameObject.SetActive(true);
         }
