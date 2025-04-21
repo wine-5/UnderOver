@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class StageSelectManager : MonoBehaviour
 {
+    public GameObject homePanel; /* ステージセレクトボタンを入れる変数 */
 
     public GameObject stageSelectPanal; /* ステージセレクトのパネルのオブジェクトを入れる変数 */
-    public GameObject stageSelectButton; /* ステージセレクトボタンを入れる変数 */
     void Start()
     {
         AudioManager.Instance.PlayBGM("Title");
@@ -15,7 +15,7 @@ public class StageSelectManager : MonoBehaviour
     public void ShowStageSelect()
     {
         stageSelectPanal.SetActive(true); /* ここで表示する */
-        stageSelectButton.SetActive(false); /* ステージセレクトボタンは非表示にする */
+        homePanel.SetActive(false); /* ステージセレクトボタンは非表示にする */
     }
 
     /* ステージ選択ボタンが押されたときの処理 */

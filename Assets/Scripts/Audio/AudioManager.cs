@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class SEData
@@ -96,7 +97,16 @@ public class AudioManager : MonoBehaviour
         };
     }
 
-    /* 音量調節用 */
-    public void SetBGMVolume(float volume) => bgmSource.volume = volume;
-    public void SetSEVolume(float volume) => seSource.volume = volume;
+        /* BGMとSEの音量を格納するプロパティ */
+   public float BGMVolume
+   {
+        get => bgmSource.volume; /* 現在のBGM音量を返す */
+        set => bgmSource.volume = value; /* 音量変更時にAudioSourceの音量を更新 */
+   }
+
+   public float SEVolume
+   {
+        get => seSource.volume; /* 現在のSE音量を返す */
+        set => seSource.volume = value; /* 音量変更時にAudioSourceの音量を更新 */
+   }
 }
