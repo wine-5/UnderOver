@@ -17,6 +17,9 @@ public class AudioManager : MonoBehaviour
     [Header("オーディオソース")]
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource seSource;
+    [Header("音声設定")]
+    [SerializeField, Range(0f, 1f)] private float bgmVolume;
+    [SerializeField, Range(0f, 1f)] private float seVolume;
 
     [Header("BGMクリップ")]
     [SerializeField] private AudioClip titleBGM;
@@ -44,7 +47,7 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); /* シーンを超えて残す */
 
             /* 辞書にSEを登録 */
-            foreach(var se in seList)
+            foreach (var se in seList)
             {
                 seDict[se.name] = se.clip;
             }
@@ -73,7 +76,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySE(string name)
     {
-        if(seDict.TryGetValue(name,out var clip) && clip != null)
+        if (seDict.TryGetValue(name, out var clip) && clip != null)
         {
             seSource.PlayOneShot(clip);
         }
@@ -97,16 +100,29 @@ public class AudioManager : MonoBehaviour
         };
     }
 
-        /* BGMとSEの音量を格納するプロパティ */
-   public float BGMVolume
-   {
-        get => bgmSource.volume; /* 現在のBGM音量を返す */
-        set => bgmSource.volume = value; /* 音量変更時にAudioSourceの音量を更新 */
-   }
 
-   public float SEVolume
-   {
-        get => seSource.volume; /* 現在のSE音量を返す */
-        set => seSource.volume = value; /* 音量変更時にAudioSourceの音量を更新 */
-   }
+
+    /* BGMとSEの音量を格納するプロパティ */
+    public float BGMVolume
+    {
+        get => bgmVolume;
+        set
+        {
+            bgmVolume = Mathf.Clamp01(value); /* 0～1の間に制限する */
+            bgmSource.volume = bgmVolume;      /* AudioSourceに反映する */
+            Debug.Log($"今のBGMの音量は：{AudioManager.Instance.BGMVolume}");
+
+        }
+    }
+
+    public float SEVolume
+    {
+        get => seVolume;
+        set
+        {
+            seVolume = Mathf.Clamp01(value); /* 0～1の間に制限する */
+            seSource.volume = seVolume;      /* AudioSourceに反映する */
+        }
+    }
+
 }
