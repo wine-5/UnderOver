@@ -14,6 +14,8 @@ public class StageSelectManager : MonoBehaviour
 
     public void ShowStageSelect()
     {
+        AudioManager.Instance.PlaySE("seClickButton"); /*SEを再生 */
+
         stageSelectPanal.SetActive(true); /* ここで表示する */
         homePanel.SetActive(false); /* ステージセレクトボタンは非表示にする */
     }
@@ -21,6 +23,8 @@ public class StageSelectManager : MonoBehaviour
     /* ステージ選択ボタンが押されたときの処理 */
     public void StartStage(int stageNumber)
     {
+        AudioManager.Instance.PlaySE("seClickButton"); /*SEを再生 */
+
         SceneController.Instance.LoadStage(stageNumber);
     }
 

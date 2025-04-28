@@ -39,15 +39,15 @@ public class GroundFlipper : MonoBehaviour
 
     void Update()
     {
-        if (isGroundFlip)
-        {
-            Debug.DrawRay(playerTransform.position, Vector2.down * rayLength, Color.blue); /* Raycastの可視化 */
+        // if (isGroundFlip)
+        // {
+        //     Debug.DrawRay(playerTransform.position, Vector2.down * rayLength, Color.blue); /* Raycastの可視化 */
 
-        }
-        else
-        {
-            Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
-        }
+        // }
+        // else
+        // {
+        //     Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
+        // }
 
         if (Input.GetMouseButtonDown(0) && !isGroundFlip) /* 左クリックを押したとき */
         {
@@ -78,6 +78,9 @@ public class GroundFlipper : MonoBehaviour
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
         }
 
+        AudioManager.Instance.PlaySE("seGroundFlip"); /* SEを再生 */
+
+
         /* ここから下の地面に落ちないように重力を無効にする */
         rb.gravityScale = -1; /* 重力を逆にする */
     }
@@ -98,6 +101,8 @@ public class GroundFlipper : MonoBehaviour
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
         }
+
+        AudioManager.Instance.PlaySE("seGroundFlip"); /* SEを再生 */
 
         rb.gravityScale = 1;
     }

@@ -35,6 +35,7 @@ public class PlayerManager : MonoBehaviour
             currentHP--;
             GameData.playerHP = currentHP;
             hpIcons[currentHP].enabled = false; /* HPアイコンを非表示にする */
+            AudioManager.Instance.PlaySE("sePlayerDamage"); /* SEを再生 */
             invincibilityController.StartInvincibility(); /* 無敵化開始 */
             
             if (currentHP <= 0)

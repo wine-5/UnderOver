@@ -2349,7 +2349,17 @@ MonoBehaviour:
   stage3BGM: {fileID: 8300000, guid: ac820f595ed93fc46adf94128efad554, type: 3}
   clearBGM: {fileID: 8300000, guid: 86cb921dd7dbb264ebbf5917bef9d979, type: 3}
   gameOverBGM: {fileID: 8300000, guid: 07f1ff87a13935244806aa6ac4e690b6, type: 3}
-  seList: []
+  seList:
+  - name: seClickButton
+    clip: {fileID: 8300000, guid: c8cb99f54737e5247ba27b0df2d36049, type: 3}
+  - name: seJump
+    clip: {fileID: 8300000, guid: 699fc67ccac191e47a5092ede1af2e02, type: 3}
+  - name: seGroundFlip
+    clip: {fileID: 8300000, guid: 8b0a31ada7554e74381e0ec9c472fd52, type: 3}
+  - name: seGoal
+    clip: {fileID: 8300000, guid: 3ce7cb72e782df243ab7de3ecfcac363, type: 3}
+  - name: sePlayerDamage
+    clip: {fileID: 8300000, guid: ac9a05059fe3c314bac72b42d86594f5, type: 3}
 --- !u!4 &1709570622
 Transform:
   m_ObjectHideFlags: 0

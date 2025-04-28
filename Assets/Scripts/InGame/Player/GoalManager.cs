@@ -8,6 +8,8 @@ public class GoalManager : MonoBehaviour
 
         if (SceneController.Instance != null)
         {
+            AudioManager.Instance.PlaySE("seGoal"); /* SEを再生 */
+
             SceneController.Instance.LoadResult();
         }
         else

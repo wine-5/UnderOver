@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-
     }
 
     private void UpdateDirection()
@@ -97,8 +96,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero; /* ジャンプをリセット */
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * jumpDirection); /* ジャンプする */
 
-            // Debug.Log(isGrounded);
-
+            AudioManager.Instance.PlaySE("seJump"); /* SEを再生 */
             isGrounded = false;
         }
     }
