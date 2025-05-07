@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// リザルト画面のUIを制御するクラス
+/// ゲームクリアまたはゲームオーバー時に適切なUIを表示
+/// </summary>
 public class ResultUIController : MonoBehaviour
 {
     /* クリア / ゲームオーバーの時に表示するオブジェクトを入れる変数 */
     public GameObject clearObj;
     public GameObject gameoverObj;
 
+    /// <summary>
+    /// ゲーム開始時に結果UIを表示
+    /// </summary>
     void Start()
     {
         ShowResultUI();
     }
 
+    /// <summary>
+    /// プレイヤーのHPに応じてクリアまたはゲームオーバーのUIを表示
+    /// </summary>
     public void ShowResultUI()
     {
         // Debug.Log($"Playerの残機は：{GameData.playerHP}");
