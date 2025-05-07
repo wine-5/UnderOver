@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// カメラの追従と制限を管理するクラス。
+/// </summary>
 public class CameraController : MonoBehaviour
 {
 
@@ -16,6 +19,11 @@ public class CameraController : MonoBehaviour
     private float cameraHalfHeight; /* カメラの縦幅の半分 (使用しない可能性あり) */
 
     private const float CAMERA_FIX_POSITION = 3.0f; /* カメラの固定位置 (使用しない可能性あり) */
+
+    /// <summary>
+    /// カメラの初期設定を行う
+    /// 主にカメラのサイズとアスペクト比を考慮して、カメラの横幅を計算
+    /// </summary>
     void Start()
     {
         Camera camera = Camera.main;
@@ -24,9 +32,14 @@ public class CameraController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 毎フレーム呼び出され、カメラをターゲットの位置に追従
+    /// ターゲットの位置に基づき、カメラの位置を調整
+    /// </summary>
     void Update()
     {
-        if (target == null) {
+        if (target == null)
+        {
             Debug.LogError("ターゲットが設定されていない");
             return;
         }
