@@ -4,41 +4,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// SEの名前と音源を保持するクラス
+/// </summary>
 [System.Serializable]
 public class SEData
 {
     public string name; /* SEの名前 */
     public AudioClip clip; /* 対応するSEの音源 */
 }
+
+/// <summary>
+/// BGMとSEを管理し、再生するオーディオ管理クラス
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
     [Header("オーディオソース")]
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioSource seSource;
+    [SerializeField] private AudioSource bgmSource; /* BGMを再生するAudioSource */
+    [SerializeField] private AudioSource seSource; /* SEを再生するAudioSource */
+    
     [Header("音声設定")]
-    [SerializeField, Range(0f, 1f)] private float bgmVolume;
-    [SerializeField, Range(0f, 1f)] private float seVolume;
+    [SerializeField, Range(0f, 1f)] private float bgmVolume; /* BGMの音量 */
+    [SerializeField, Range(0f, 1f)] private float seVolume; /* SEの音量 */
 
     [Header("BGMクリップ")]
-    [SerializeField] private AudioClip titleBGM;
-    [SerializeField] private AudioClip stage1BGM;
-    [SerializeField] private AudioClip stage2BGM;
-    [SerializeField] private AudioClip stage3BGM;
-    [SerializeField] private AudioClip clearBGM;
-    [SerializeField] private AudioClip gameOverBGM;
+    [SerializeField] private AudioClip titleBGM; /* タイトルBGM */
+    [SerializeField] private AudioClip stage1BGM; /* ステージ1のBGM */
+    [SerializeField] private AudioClip stage2BGM; /* ステージ2のBGM */
+    [SerializeField] private AudioClip stage3BGM; /* ステージ3のBGM */
+    [SerializeField] private AudioClip clearBGM;  /* ゲームクリア時のBGM */
+    [SerializeField] private AudioClip gameOverBGM; /* ゲームオーバー時のBGM */
 
     [Header("SEクリップ")]
     [SerializeField] private List<SEData> seList = new(); /* インスペクターで設定するSEの一覧 */
     private Dictionary<String, AudioClip> seDict = new(); /* 実際に再生時に使用する辞書 */
 
-    /* SEクリップ（辞書）の使い方
-     * インスペクターからListを開いて名前とSEを入れる
-     * VSCで呼び出したいメソッドに以下のように書く
-     * AudioManager.Instance.PlaySE("ここにSEの名前");
-     */
-
+    /// <summary>
+    /// インスタンスを設定し、SE辞書を初期化する
+    /// </summary>
     void Awake()
     {
         if (Instance == null)
@@ -58,6 +63,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 指定した名前のBGMを再生する
+    /// </summary>
+    /// <param name="name">再生するBGMの名前</param>
+    /// <param name="volume">音量（デフォルトは1.0f）</param>
     public void PlayBGM(string name, float volume = 1.0f)
     {
         AudioClip clip = GetBGMClip(name);
@@ -69,11 +79,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// BGMの再生を停止する
+    /// </summary>
     public void StopBGM()
     {
         bgmSource.Stop();
     }
 
+    /// <summary>
+    /// 指定した名前のSEを再生する
+    /// </summary>
+    /// <param name="name">再生するSEの名前</param>
     public void PlaySE(string name)
     {
         if (seDict.TryGetValue(name, out var clip) && clip != null)
@@ -86,6 +103,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 名前に対応するBGMのAudioClipを取得する
+    /// </summary>
+    /// <param name="name">取得するBGMの名前</param>
+    /// <returns>対応するBGMのAudioClip</returns>
     private AudioClip GetBGMClip(string name)
     {
         return name switch
@@ -100,9 +122,11 @@ public class AudioManager : MonoBehaviour
         };
     }
 
-
-
     /* BGMとSEの音量を格納するプロパティ */
+
+    /// <summary>
+    /// BGMの音量を取得および設定するプロパティ
+    /// </summary>
     public float BGMVolume
     {
         get => bgmVolume;
@@ -111,10 +135,12 @@ public class AudioManager : MonoBehaviour
             bgmVolume = Mathf.Clamp01(value); /* 0～1の間に制限する */
             bgmSource.volume = bgmVolume;      /* AudioSourceに反映する */
             Debug.Log($"今のBGMの音量は：{AudioManager.Instance.BGMVolume}");
-
         }
     }
 
+    /// <summary>
+    /// SEの音量を取得および設定するプロパティ
+    /// </summary>
     public float SEVolume
     {
         get => seVolume;
@@ -124,5 +150,4 @@ public class AudioManager : MonoBehaviour
             seSource.volume = seVolume;      /* AudioSourceに反映する */
         }
     }
-
 }

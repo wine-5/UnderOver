@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーが地面を反転して移動する処理を制御する
+/// </summary>
 public class GroundFlipper : MonoBehaviour
 {
 
@@ -23,7 +26,7 @@ public class GroundFlipper : MonoBehaviour
 
 
     /// <summary>
-    /// 初期化処理をしている処理
+    /// コンポーネントの初期化処理を行う
     /// </summary>
     void Start()
     {
@@ -39,7 +42,7 @@ public class GroundFlipper : MonoBehaviour
     }
 
     /// <summary>
-    /// 左クリックをしているかを監視している
+    /// 左クリック入力を監視し、地面反転処理を実行する
     /// </summary>
     void Update()
     {
@@ -64,7 +67,7 @@ public class GroundFlipper : MonoBehaviour
     }
 
     /// <summary>
-    /// Playerが反転したときの処理
+    /// プレイヤーが地面を反転する処理
     /// </summary>
     private void FlipGround()
     {
@@ -94,7 +97,7 @@ public class GroundFlipper : MonoBehaviour
     }
 
     /// <summary>
-    /// Playerが元の地面に戻った際の処理
+    /// プレイヤーの高さを取得して、地形へのめり込みを防ぐ
     /// </summary>
     private void ResetGround()
     {
