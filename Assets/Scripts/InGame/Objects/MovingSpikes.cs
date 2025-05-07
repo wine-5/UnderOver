@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// とげオブジェクトを指定方向に移動させるスクリプト
+/// </summary>
 public class MovingSpikes : MonoBehaviour
 {
     /* 動く方向の設定 */
@@ -24,11 +27,18 @@ public class MovingSpikes : MonoBehaviour
     [SerializeField] float moveSpeed = 2f;
     private Vector3 startPos;
     private float moveTimer = 0f;
+
+    /// <summary>
+    /// スタート位置を初期化する
+    /// </summary>
     void Start()
     {
         startPos = transform.position;
     }
 
+    /// <summary>
+    /// 毎フレーム呼び出され、とげを指定された方向・移動モードに応じて移動させる
+    /// </summary>
     void Update()
     {
         moveTimer += Time.deltaTime;
