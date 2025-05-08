@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class VolumeSettings : MonoBehaviour
 {
-    
-     /* ユーザーが自由に音量を変えるためのSlider */
-     [SerializeField] private Slider bgmSlider;
-     [SerializeField] private Slider seSlider;
-      void Start()
+
+    /* ユーザーが自由に音量を変えるためのSlider */
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider seSlider;
+    void Start()
     {
         /* スライダーの初期設定 */
         bgmSlider.value = AudioManager.Instance.BGMVolume;

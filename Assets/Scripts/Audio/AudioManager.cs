@@ -14,12 +14,14 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    private const float SE_VOLUME_MULTIPLIER = 3f; /* SEの音量を倍 */
+
     [Header("オーディオソース")]
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource seSource;
     [Header("音声設定")]
-    [SerializeField, Range(0f, 1f)] private float bgmVolume;
     [SerializeField, Range(0f, 1f)] private float seVolume;
+    [SerializeField, Range(0f, 1f)] private float bgmVolume;
 
     [Header("BGMクリップ")]
     [SerializeField] private AudioClip titleBGM;
@@ -32,12 +34,6 @@ public class AudioManager : MonoBehaviour
     [Header("SEクリップ")]
     [SerializeField] private List<SEData> seList = new(); /* インスペクターで設定するSEの一覧 */
     private Dictionary<String, AudioClip> seDict = new(); /* 実際に再生時に使用する辞書 */
-
-    /* SEクリップ（辞書）の使い方
-     * インスペクターからListを開いて名前とSEを入れる
-     * VSCで呼び出したいメソッドに以下のように書く
-     * AudioManager.Instance.PlaySE("ここにSEの名前");
-     */
 
     void Awake()
     {
@@ -111,7 +107,6 @@ public class AudioManager : MonoBehaviour
             bgmVolume = Mathf.Clamp01(value); /* 0～1の間に制限する */
             bgmSource.volume = bgmVolume;      /* AudioSourceに反映する */
             Debug.Log($"今のBGMの音量は：{AudioManager.Instance.BGMVolume}");
-
         }
     }
 
@@ -120,8 +115,9 @@ public class AudioManager : MonoBehaviour
         get => seVolume;
         set
         {
-            seVolume = Mathf.Clamp01(value); /* 0～1の間に制限する */
+            seVolume = Mathf.Clamp01(value) * SE_VOLUME_MULTIPLIER; /* SEの音量を倍にして返す */
             seSource.volume = seVolume;      /* AudioSourceに反映する */
+            Debug.Log($"SE音量が変更されました: {seVolume}");  // デバッグログを出力
         }
     }
 
