@@ -2085,7 +2085,6 @@ GameObject:
   - component: {fileID: 1709570620}
   - component: {fileID: 1709570619}
   - component: {fileID: 1709570624}
-  - component: {fileID: 1709570623}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -2299,8 +2298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1709570620}
   seSource: {fileID: 1709570619}
-  bgmVolume: 1
-  seVolume: 1
+  seVolume: 0
+  bgmVolume: 0
   titleBGM: {fileID: 8300000, guid: ce8819b2f38f4ef488a0039062e63387, type: 3}
   stage1BGM: {fileID: 8300000, guid: f71aeab744e32804e879b2c495cd560d, type: 3}
   stage2BGM: {fileID: 8300000, guid: e2d156f06fa36054dbfa09203a82fffc, type: 3}
@@ -2333,19 +2332,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1709570623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709570618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a664795341a76cb48bf014b2fd699942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSliderController: {fileID: 2135826500}
 --- !u!114 &1709570624
 MonoBehaviour:
   m_ObjectHideFlags: 0
