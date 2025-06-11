@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    private const float SE_VOLUME_MULTIPLIER = 3f; /* SEの音量を倍 */
+
     [Header("オーディオソース")]
     [SerializeField] private AudioSource bgmSource; /* BGMを再生するAudioSource */
     [SerializeField] private AudioSource seSource; /* SEを再生するAudioSource */
@@ -146,8 +148,9 @@ public class AudioManager : MonoBehaviour
         get => seVolume;
         set
         {
-            seVolume = Mathf.Clamp01(value); /* 0～1の間に制限する */
+            seVolume = Mathf.Clamp01(value) * SE_VOLUME_MULTIPLIER; /* SEの音量を倍にして返す */
             seSource.volume = seVolume;      /* AudioSourceに反映する */
+            Debug.Log($"SE音量が変更されました: {seVolume}");  // デバッグログを出力
         }
     }
 }
