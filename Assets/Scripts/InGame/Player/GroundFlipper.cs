@@ -35,10 +35,6 @@ public class GroundFlipper : MonoBehaviour
             playerTransform = playerObject.transform; /* プレイヤーのTransformを取得 */
             rb = playerObject.GetComponent<Rigidbody2D>(); /* プレイヤーのRigidbody2Dを取得 */
         }
-        else
-        {
-            Debug.LogError("PlayerObjectが設定されていない");
-        }
     }
 
     /// <summary>
@@ -46,16 +42,6 @@ public class GroundFlipper : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // if (isGroundFlip)
-        // {
-        //     Debug.DrawRay(playerTransform.position, Vector2.down * rayLength, Color.blue); /* Raycastの可視化 */
-
-        // }
-        // else
-        // {
-        //     Debug.DrawRay(playerTransform.position, Vector2.up * rayLength, Color.red); /* Raycastの可視化 */
-        // }
-
         if (Input.GetMouseButtonDown(0) && !isGroundFlip) /* 左クリックを押したとき */
         {
             FlipGround(); /* Playerの位置を逆向きにする */
@@ -83,7 +69,7 @@ public class GroundFlipper : MonoBehaviour
         {
             float offset = GetPlayerColliderHeight() / 2f;
             Vector2 newPosition = hit.point; /* Raycastが当たった地面の位置を取得 */
-            // Debug.Log(hit.collider.gameObject.name); /* デバッグ用に地面の位置を表示 */
+
             newPosition.y -= offset; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
@@ -91,8 +77,7 @@ public class GroundFlipper : MonoBehaviour
 
         AudioManager.Instance.PlaySE("seGroundFlip"); /* SEを再生 */
 
-
-        /* ここから下の地面に落ちないように重力を無効にする */
+        rb.velocity = Vector2.zero; // 速度リセットで反動防止
         rb.gravityScale = -1; /* 重力を逆にする */
     }
 
@@ -111,7 +96,7 @@ public class GroundFlipper : MonoBehaviour
         {
             float offset = GetPlayerColliderHeight() / 2f;
             Vector2 newPosition = hit.point; /* Raycastが当たった地面の位置を取得 */
-            // Debug.Log(hit.collider.gameObject.name); /* デバッグ用に地面の位置を表示 */
+
             newPosition.y += offset; /* めり込みするのを防止するために少し下に設定 */
 
             playerTransform.position = newPosition; /* Playerの位置を地面の位置に設定 */
@@ -119,6 +104,7 @@ public class GroundFlipper : MonoBehaviour
 
         AudioManager.Instance.PlaySE("seGroundFlip"); /* SEを再生 */
 
+        rb.velocity = Vector2.zero; // 速度リセットで反動防止
         rb.gravityScale = 1;
     }
 
