@@ -60,7 +60,6 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("Stage" + stageNumber);
     }
 
-    /* 次のステージをロードするメソッド */
 
     /// <summary>
     /// 次のステージを読み込むメソッド

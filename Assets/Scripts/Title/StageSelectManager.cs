@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class StageSelectManager : MonoBehaviour
 {
-    public GameObject homePanel; /* ステージセレクトボタンを入れる変数 */
+    [SerializeField] private GameObject homePanel; /* ステージセレクトボタンを入れる変数 */
 
-    public GameObject stageSelectPanal; /* ステージセレクトのパネルのオブジェクトを入れる変数 */
+    [SerializeField] private GameObject stageSelectPanal; /* ステージセレクトのパネルのオブジェクトを入れる変数 */
 
     /// <summary>
     /// 初期化処理。BGM再生とステージ選択パネルの非表示化。

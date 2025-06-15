@@ -9,8 +9,8 @@ using UnityEngine;
 public class ResultUIController : MonoBehaviour
 {
     /* クリア / ゲームオーバーの時に表示するオブジェクトを入れる変数 */
-    public GameObject clearObj;
-    public GameObject gameoverObj;
+    [SerializeField] private GameObject clearObj;
+    [SerializeField] private GameObject gameoverObj;
 
     /// <summary>
     /// ゲーム開始時に結果UIを表示

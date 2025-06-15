@@ -9,21 +9,16 @@ public class PlayerManager : MonoBehaviour
 {
     /* プレイヤーのHP */
     [SerializeField] private int currentHP = 3;
-    public List<Image> hpIcons; /* HPアイコンを入れる変数 */
-
-    /* Playerを入れる変数 */
-    public GameObject player;
-
-    /* InvincibilityController（無敵状態のスクリプト）*/
-    [SerializeField] private InvincibilityController invincibilityController;
+    [SerializeField] private List<Image> hpIcons; /* HPアイコンを入れる変数 */
+    private InvincibilityController invincibilityController; /* InvincibilityController（無敵状態のスクリプト）を参照する */
 
     /// <summary>
     ///  現在のPlayerのHPを取得する
     /// </summary>
     void Start()
     {
-        // Debug.Log("今のPlayerのHP" + currentHP);
         currentHP = hpIcons.Count; /* HPアイコンの数を取得 */
+        invincibilityController = GetComponent<InvincibilityController>();
     }
 
     /// <summary>
@@ -34,10 +29,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            TakeDamage(); /* 攻撃を受けたときの処理 */
+            TakeDamage(); /* ダメージを受けるメソッドを呼ぶ */
         }
     }
 
+    /// <summary>
+    /// プレイヤーにダメージを与える処理
+    /// </summary>
     private void TakeDamage()
     {
         if (currentHP > 0 && !invincibilityController.IsInvincible())
@@ -47,10 +45,10 @@ public class PlayerManager : MonoBehaviour
             hpIcons[currentHP].enabled = false; /* HPアイコンを非表示にする */
             AudioManager.Instance.PlaySE("sePlayerDamage"); /* SEを再生 */
             invincibilityController.StartInvincibility(); /* 無敵化開始 */
-            
+
             if (currentHP <= 0)
             {
-                player.SetActive(false);
+                gameObject.SetActive(false);
                 SceneController.Instance.LoadResult();
             }
         }

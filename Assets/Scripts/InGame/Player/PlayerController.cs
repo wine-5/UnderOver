@@ -14,14 +14,22 @@ public class PlayerController : MonoBehaviour
     [Header("移動速度とジャンプ力")]
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float jumpPower = 5.0f;
-    public Rigidbody2D rb;
-
+    private Rigidbody2D rb;
     private Vector2 moveInput;
 
     /* フラグの設定 */
     public bool isGrounded = true;
 
     [SerializeField] private GroundFlipper groundFlipper; /* GroundFlipperのスクリプトを入れる変数 */
+    // --- 定数定義 ---
+    private const float DIRECTION_RIGHT = 1f;
+    private const float DIRECTION_LEFT = -1f;
+    private const float DIRECTION_NONE = 0f;
+    private const float ROTATION_Y_RIGHT = 180f;
+    private const float ROTATION_Y_LEFT = 0f;
+    private const float ROTATION_Z_NORMAL = 0f;
+    private const float ROTATION_Z_FLIPPED = 180f;
+    private const string GROUND_TAG = "Ground";
 
     /// <summary>
     /// 初期設定。Rigidbody2Dを取得し、GroundFlipperの設定を確認
@@ -29,11 +37,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        if (groundFlipper == null)
-        {
-            // Debug.LogError("GroundFlipperが設定されていない");
-        }
     }
 
     /// <summary>
@@ -54,9 +57,6 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Move: " + context.ReadValue<Vector2>());
         moveInput = context.ReadValue<Vector2>();
-
-
-
     }
 
     /// <summary>
@@ -76,32 +76,32 @@ public class PlayerController : MonoBehaviour
 
         if (!isGroundFlip) /* 下の地面 */
         {
-            if (moveInput.x >= 1) /* 右に進んでいる */
+            if (moveInput.x >= DIRECTION_RIGHT) /* 右に進んでいる */
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                transform.rotation = Quaternion.Euler(0, ROTATION_Y_RIGHT, ROTATION_Z_NORMAL);
             }
-            else if (moveInput.x <= -1) /* 左に進んでいる */
+            else if (moveInput.x <= DIRECTION_LEFT) /* 左に進んでいる */
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, ROTATION_Y_LEFT, ROTATION_Z_NORMAL);
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                rb.velocity = new Vector2(DIRECTION_NONE, rb.velocity.y);
             }
         }
         else if (isGroundFlip) /* 上の地面 */
         {
-            if (moveInput.x >= 1) /* 右に進んでいる */
+            if (moveInput.x >= DIRECTION_RIGHT) /* 右に進んでいる */
             {
-                transform.rotation = Quaternion.Euler(0, 0, 180);
+                transform.rotation = Quaternion.Euler(0, ROTATION_Y_LEFT, ROTATION_Z_FLIPPED);
             }
-            else if (moveInput.x <= -1) /* 左に進んでいる */
+            else if (moveInput.x <= DIRECTION_LEFT) /* 左に進んでいる */
             {
-                transform.rotation = Quaternion.Euler(0, 180, 180);
+                transform.rotation = Quaternion.Euler(0, ROTATION_Y_RIGHT, ROTATION_Z_FLIPPED);
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                rb.velocity = new Vector2(DIRECTION_NONE, rb.velocity.y);
             }
         }
     }
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded) /* どちらかの地面にいるとき */
         {
             // Debug.Log("今とんだ");
-            float jumpDirection = isGroundFlip ? -1 : 1; /* 上の地面なら下に、下の地面なら上に */
+            float jumpDirection = isGroundFlip ? DIRECTION_LEFT : DIRECTION_RIGHT; /* 上の地面なら下に、下の地面なら上に */
             rb.velocity = Vector2.zero; /* ジャンプをリセット */
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * jumpDirection); /* ジャンプする */
 
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="collision">衝突情報</param>
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == GROUND_TAG)
         {
             isGrounded = true;
         }

@@ -18,9 +18,5 @@ public class GoalManager : MonoBehaviour
 
             SceneController.Instance.LoadResult();
         }
-        else
-        {
-            // Debug.Log("SceneControllerのInstanceがnullです");
-        }
     }
 }

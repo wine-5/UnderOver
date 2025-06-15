@@ -7,8 +7,8 @@ public class AlignSprites : MonoBehaviour
 {
     [SerializeField] private float currentX = 0.0f; /* 現在のX座標 */
 
-    public GameObject[] images; /* 並べたい画像のオブジェクトを入れるよう */
-    public float spacing = 0.0f; /* 画像の間隔 */
+    [SerializeField] private GameObject[] images; /* 並べたい画像のオブジェクトを入れるよう */
+    [SerializeField] private float spacing = 0.0f; /* 画像の間隔 */
 
     /// <summary>
     /// ゲーム開始時にスプライトを並べる

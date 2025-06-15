@@ -10,15 +10,14 @@ public class CameraController : MonoBehaviour
 {
 
     [SerializeField] private float zPosition = -100f;
-    public Transform target; /* 追従するオブジェクトを入れる */
-    public float smoothing = 5f; /* カメラの追従速度 */
-    public Vector2 minBounds; /* カメラの左下の制限 */
-    public Vector2 maxBounds; /* カメラの右上の制限 */
+    [SerializeField] private Transform target; /* 追従するオブジェクトを入れる */
+    private float smoothing = 5f; /* カメラの追従速度 */
+    private Vector2 minBounds; /* カメラの左下の制限 */
+    private Vector2 maxBounds; /* カメラの右上の制限 */
 
     private float cameraHalfWidth; /* カメラの横幅の半分 */
-    private float cameraHalfHeight; /* カメラの縦幅の半分 (使用しない可能性あり) */
+    private float cameraHalfHeight; /* カメラの縦幅の半分 */
 
-    private const float CAMERA_FIX_POSITION = 3.0f; /* カメラの固定位置 (使用しない可能性あり) */
 
     /// <summary>
     /// カメラの初期設定を行う
