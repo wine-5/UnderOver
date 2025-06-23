@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 426.66666, y: -1310}
+  m_AnchoredPosition: {x: 426.66663, y: -1310}
   m_SizeDelta: {x: 145, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129458756
@@ -1079,8 +1079,8 @@ Canvas:
   m_GameObject: {fileID: 994357144}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1035392697}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1234,15 +1234,15 @@ RectTransform:
   m_GameObject: {fileID: 1201002934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 994357148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2560, y: 1440}
+  m_AnchoredPosition: {x: 0, y: -130}
+  m_SizeDelta: {x: 3160, y: 1840}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201002936
 MonoBehaviour:
@@ -2298,8 +2298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1709570620}
   seSource: {fileID: 1709570619}
-  seVolume: 0
   bgmVolume: 0
+  seVolume: 0
   titleBGM: {fileID: 8300000, guid: ce8819b2f38f4ef488a0039062e63387, type: 3}
   stage1BGM: {fileID: 8300000, guid: f71aeab744e32804e879b2c495cd560d, type: 3}
   stage2BGM: {fileID: 8300000, guid: e2d156f06fa36054dbfa09203a82fffc, type: 3}
