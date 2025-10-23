@@ -568,10 +568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2560, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -864,9 +864,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zPosition: -100
   target: {fileID: 1418612351}
-  smoothing: 5
-  minBounds: {x: 0, y: 0}
-  maxBounds: {x: 0, y: 0}
 --- !u!1 &632926138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,8 +1778,6 @@ MonoBehaviour:
   - {fileID: 263285278}
   - {fileID: 92187947}
   - {fileID: 172740411}
-  player: {fileID: 1418612339}
-  invincibilityController: {fileID: 1418612356}
 --- !u!114 &1418612341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1797,7 +1792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
-  rb: {fileID: 0}
   isGrounded: 1
   groundFlipper: {fileID: 1418612355}
 --- !u!114 &1418612342
